@@ -4,6 +4,19 @@ from sklearn.linear_model import LinearRegression as lr
 import  matplotlib.pyplot as plt
 
 data = pd.read_csv("linear.csv")
+data.drop('kira', axis=1, inplace = True)
+
+from sklearn.impute import SimpleImputer
+
+imputer = SimpleImputer(missing_values = np.NaN, strategy = 'mean', fill_value=None, verbose=0)
+newdata = data.iloc[:,0:2].values
+print(newdata)
+
+imputer = imputer.fit(newdata[:,0:2])
+newdata[:,0:2] = imputer.transform(newdata[:,0:2])
+print(newdata)
+
+
 x=data["metrekare"]
 y=data["fiyat"]
 
